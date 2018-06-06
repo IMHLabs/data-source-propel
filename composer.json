@@ -1,0 +1,25 @@
+{
+    "name":         "IMHLabs/data-source-propel",
+    "description":  "IMHLabs Propel Data Source Wrapper",
+    "type":         "library",
+    "keywords": [
+        "Propel"
+    ],
+    "authors": [
+        {
+            "name":      "Inmotion Hosting",
+            "email":     "development@inmotionhosting.com"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "propel/propel": "2.0.0-alpha8",
+        "monolog/monolog": "^1.23"
+    },
+    "autoload": {
+        "psr-4": {
+            "DataSourcePropel\\": "src/"
+        }
+    }
+}
+
