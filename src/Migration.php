@@ -345,7 +345,7 @@ class Migration
      */
     public function _getVendorPath()
     {
-        return realpath ( __DIR__ . '/../../../../' );
+        return realpath ( __DIR__ . '/../../../' );
     }
 }
 
