@@ -34,7 +34,11 @@ class Propel
         $config = @$config ['propel'];
         $connections = @$config ['database'] ['connections'];
         $defaultSettings = (@$connections ['default']) ? $connections ['default'] : [ ];
+		$dataSources = ($dataSources) ?: array_keys($connections);
         foreach ( $dataSources as $dataSource ) {
+			if ($dataSource == 'default') {
+				continue;
+			}
             $dataSourceName = null;
             $dataSourceSettings = [ ];
             if (class_exists ( $dataSource )) {
@@ -60,7 +64,7 @@ class Propel
             } else {
                 $dataSourceName = $dataSource;
             }
-            $configSettings = (@$connections [$dataSourceName]) ?  : [ ];
+            $configSettings = (@$connections [$dataSource]) ?  : [ ];
             $settings = array_merge ( $defaultSettings, $configSettings );
             $connectionSettings = [ 
                 'name' => $dataSourceName,
@@ -130,9 +134,9 @@ class Propel
         } else {
             $dataSourceName = $dataSource;
         }
-        $configSettings = (@$connections [$dataSourceName]) ?  : [ ];
+        $configSettings = (@$connections [$dataSource]) ?  : [ ];
         $settings = array_merge ( $defaultSettings, $configSettings );
-        $migrationSettings = (@$migrationSettings [$dataSourceName]) ?  : [ ];
+        $migrationSettings = (@$migrationSettings [$dataSource]) ?  : [ ];
         $migrationSettings = array_merge ( $defaultMigrationSettings, $migrationSettings );
         $connectionSettings = [ 
             'name' => $dataSourceName,
@@ -154,3 +158,4 @@ class Propel
         return $migrationClass;
     }
 }
+
