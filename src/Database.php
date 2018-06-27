@@ -29,28 +29,28 @@ class Database
      *
      * @var \DataSourcePropel\Connection
      */
-    protected static $_connection = null;
+    protected static $connection = null;
     
     /**
      * Database Migration
      *
      * @var \DataSourcePropel\Migration
      */
-    protected static $_migration = null;
+    protected static $migration = null;
     
     /**
      * Enable Logging
      *
      * @var boolean
      */
-    protected static $_loggingEnabled = null;
+    protected static $loggingEnabled = null;
     
     /**
      * Logfile
      *
      * @var string
      */
-    protected static $_logFile = null;
+    protected static $logFile = null;
 
     /**
      * Set Connection Class
@@ -60,7 +60,7 @@ class Database
      */
     public static function setConnection($connection)
     {
-        static::$_connection = $connection;
+        static::$connection = $connection;
     }
 
     /**
@@ -70,11 +70,11 @@ class Database
      */
     public static function getConnection()
     {
-        if (! static::$_connection) {
-            $connection = new Connection ();
-            static::setConnection ( $connection );
+        if (!static::$connection) {
+            $connection = new Connection();
+            static::setConnection($connection);
         }
-        return static::$_connection;
+        return static::$connection;
     }
 
     /**
@@ -85,7 +85,7 @@ class Database
      */
     public static function setMigration($migration)
     {
-        static::$_migration = $migration;
+        static::$migration = $migration;
     }
 
     /**
@@ -95,12 +95,12 @@ class Database
      */
     public static function getMigration()
     {
-        if (! static::$_migration) {
-            $migration = new \DataSourcePropel\Migration ();
-            $migration->setConnection ( static::getConnection () );
-            static::$_migration = $migration;
+        if (!static::$migration) {
+            $migration = new \DataSourcePropel\Migration();
+            $migration->setConnection(static::getConnection());
+            static::$migration = $migration;
         }
-        return static::$_migration;
+        return static::$migration;
     }
 
     /**
@@ -111,7 +111,7 @@ class Database
      */
     public static function setAdapter($adapter)
     {
-        self::getConnection ()->setAdapter ( $adapter );
+        self::getConnection()->setAdapter($adapter);
     }
 
     /**
@@ -122,7 +122,7 @@ class Database
      */
     public static function setHost($host)
     {
-        self::getConnection ()->setHost ( $host );
+        self::getConnection()->setHost($host);
     }
 
     /**
@@ -133,7 +133,7 @@ class Database
      */
     public static function setDbname($dbname)
     {
-        self::getConnection ()->setDbname ( $dbname );
+        self::getConnection()->setDbname($dbname);
     }
 
     /**
@@ -144,7 +144,7 @@ class Database
      */
     public static function setUser($user)
     {
-        self::getConnection ()->setUser ( $user );
+        self::getConnection()->setUser($user);
     }
 
     /**
@@ -155,7 +155,7 @@ class Database
      */
     public static function setPassword($password)
     {
-        self::getConnection ()->setPassword ( $password );
+        self::getConnection()->setPassword($password);
     }
 
     /**
@@ -166,7 +166,7 @@ class Database
      */
     public static function setDsn($dsn)
     {
-        self::getConnection ()->setDsn ( $dsn );
+        self::getConnection()->setDsn($dsn);
     }
 
     /**
@@ -177,7 +177,7 @@ class Database
      */
     public static function setCharset($charset)
     {
-        self::getConnection ()->setCharset ( $charset );
+        self::getConnection()->setCharset($charset);
     }
 
     /**
@@ -188,7 +188,7 @@ class Database
      */
     public static function setQueries($queries)
     {
-        self::getConnection ()->setQueries ( $queries );
+        self::getConnection()->setQueries($queries);
     }
 
     /**
@@ -199,7 +199,7 @@ class Database
      */
     public static function setClassname($classname)
     {
-        self::getConnection ()->setClassname ( $classname );
+        self::getConnection()->setClassname($classname);
     }
 
     /**
@@ -210,7 +210,7 @@ class Database
      */
     public static function setLoggingEnabled($loggingEnabled)
     {
-        static::$_loggingEnabled = ($loggingEnabled) ? true : false;
+        static::$loggingEnabled = ($loggingEnabled) ? true : false;
     }
 
     /**
@@ -220,7 +220,7 @@ class Database
      */
     public static function getLoggingEnabled()
     {
-        return static::$_loggingEnabled;
+        return static::$loggingEnabled;
     }
 
     /**
@@ -231,7 +231,7 @@ class Database
      */
     public static function setLogDir($logDir)
     {
-        static::$_logDir = $logDir;
+        static::$logDir = $logDir;
     }
 
     /**
@@ -241,7 +241,7 @@ class Database
      */
     public static function getLogDir()
     {
-        return static::$_logDir;
+        return static::$logDir;
     }
 
     /**
@@ -252,7 +252,7 @@ class Database
      */
     public static function setLogFile($logFile)
     {
-        static::$_logFile = $logFile;
+        static::$logFile = $logFile;
     }
 
     /**
@@ -262,7 +262,7 @@ class Database
      */
     public static function getLogFile()
     {
-        return static::$_logFile;
+        return static::$logFile;
     }
 
     /**
@@ -272,7 +272,7 @@ class Database
      */
     public static function build()
     {
-        self::getMigration ()->build ();
+        self::getMigration()->build();
     }
 
     /**
@@ -282,7 +282,7 @@ class Database
      */
     public static function buildSql()
     {
-        self::getMigration ()->buildSql ();
+        self::getMigration()->buildSql();
     }
 
     /**
@@ -292,7 +292,7 @@ class Database
      */
     public static function diff()
     {
-        self::getMigration ()->diff ();
+        self::getMigration()->diff();
     }
 
     /**
@@ -302,7 +302,7 @@ class Database
      */
     public static function down()
     {
-        self::getMigration ()->down ();
+        self::getMigration()->down();
     }
 
     /**
@@ -312,7 +312,7 @@ class Database
      */
     public static function migrate()
     {
-        self::getMigration ()->migrate ();
+        self::getMigration()->migrate();
     }
 
     /**
@@ -322,7 +322,7 @@ class Database
      */
     public static function status()
     {
-        self::getMigration ()->status ();
+        self::getMigration()->status();
     }
 
     /**
@@ -332,7 +332,7 @@ class Database
      */
     public static function up()
     {
-        self::getMigration ()->up ();
+        self::getMigration()->up();
     }
 
     /**
@@ -343,44 +343,49 @@ class Database
      */
     public static function init($con = null)
     {
-        if (is_array ( $con )) {
-            $connection = \DataSourcePropel\Database::getConnection ();
-            $connection->setAdapter ( $con ['adapter'] )->setHost ( $con ['host'] )->setDbname ( $con ['dbname'] )->setUser ( $con ['user'] )->setPassword ( $con ['password'] );
-            if ((array_key_exists ( 'charset', $con )) && ($con ['charset'])) {
-                $connection->setCharset ( $con ['charset'] );
+        if (is_array($con)) {
+            $connection = \DataSourcePropel\Database::getConnection();
+            $connection->setAdapter($con['adapter'])
+                ->setHost($con['host'])
+                ->setDbname($con['dbname'])
+                ->setUser($con['user'])
+                ->setPassword($con['password']);
+            if ((array_key_exists('charset', $con)) && ($con['charset'])) {
+                $connection->setCharset($con['charset']);
             }
-            if ((array_key_exists ( 'queries', $con )) && ($con ['queries'])) {
-                $connection->setQueries ( $con ['queries'] );
+            if ((array_key_exists('queries', $con)) && ($con['queries'])) {
+                $connection->setQueries($con['queries']);
             }
-            if ((array_key_exists ( 'classname', $con )) && ($con ['classname'])) {
-                $connection->setClassname ( $con ['classname'] );
+            if ((array_key_exists('classname', $con)) && ($con['classname'])) {
+                $connection->setClassname($con['classname']);
             }
-            if (@$con ['logfile']) {
-                $connection->setLogFile ( $con ['logfile'] );
-                $connection->setLoggingEnabled ( true );
+            if (@$con['logfile']) {
+                $connection->setLogFile($con['logfile']);
+                $connection->setLoggingEnabled(true);
             }
-            $connection->setName ( $con ['name'] );
-            self::setConnection ( $connection );
+            $connection->setName($con['name']);
+            self::setConnection($connection);
         } elseif ($con) {
-            self::setConnection ( $con );
+            self::setConnection($con);
         }
-        $serviceContainer = Propel::getServiceContainer ();
-        $connection = self::getConnection ();
-        if ($dsn = $connection->getDsn ()) {
-            $serviceContainer->setAdapterClass ( $connection->getName (), $connection->getAdapter () );
-            $manager = new ConnectionManagerSingle ();
-            $manager->setConfiguration ( [
-                'dsn' => $dsn,
-                'user' => $connection->getUser (),
-                'password' => $connection->getPassword () 
-            ] );
-            $serviceContainer->setConnectionManager ( $connection->getName (), $manager );
-            if (self::getLoggingEnabled ()) {
-                $logger = new Logger ( $connection->getName () );
-                $logger->pushHandler ( new StreamHandler ( self::getLogFile (), Logger::DEBUG ) );
-                $serviceContainer->setLogger ( $connection->getName (), $logger );
-                $con = $serviceContainer->getConnectionManager ( $connection->getName () )->getWriteConnection ( $serviceContainer->getAdapter ( $connection->getName () ) );
-                $con->useDebug ( true );
+        $serviceContainer = Propel::getServiceContainer();
+        $connection = self::getConnection();
+        if ($dsn = $connection->getDsn()) {
+            $serviceContainer->setAdapterClass($connection->getName(), $connection->getAdapter());
+            $manager = new ConnectionManagerSingle();
+            $manager->setConfiguration([
+                'dsn'      => $dsn,
+                'user'     => $connection->getUser(),
+                'password' => $connection->getPassword() 
+            ]);
+            $serviceContainer->setConnectionManager($connection->getName(), $manager);
+            if (self::getLoggingEnabled()) {
+                $logger = new Logger($connection->getName());
+                $logger->pushHandler(new StreamHandler(self::getLogFile(), Logger::DEBUG));
+                $serviceContainer->setLogger($connection->getName(), $logger);
+                $con = $serviceContainer->getConnectionManager($connection->getName())
+                    ->getWriteConnection($serviceContainer->getAdapter($connection->getName()));
+                $con->useDebug(true);
             }
         }
     }

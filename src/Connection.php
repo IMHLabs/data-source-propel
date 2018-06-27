@@ -19,56 +19,56 @@ class Connection
      *
      * @var string
      */
-    protected $_name = null;
+    protected $name = null;
     
     /**
      * Data Source Adapter
      *
      * @var string
      */
-    protected $_adapter = 'mysql';
+    protected $adapter = 'mysql';
     
     /**
      * Data Source Hostname
      *
      * @var string
      */
-    protected $_host = 'localhost';
+    protected $host = 'localhost';
     
     /**
      * Data Source Dbname
      *
      * @var string
      */
-    protected $_dbname = null;
+    protected $dbname = null;
     
     /**
      * Data Source User
      *
      * @var string
      */
-    protected $_user = null;
+    protected $user = null;
     
     /**
      * Data Source Password
      *
      * @var string
      */
-    protected $_password = '';
+    protected $password = '';
     
     /**
      * Data Source Dsn
      *
      * @var string
      */
-    protected $_dsn = null;
+    protected $dsn = null;
     
     /**
      * Charset
      *
      * @var string
      */
-    protected $_charset = 'utf8';
+    protected $charset = 'utf8';
     
     /**
      * Queries
@@ -84,7 +84,7 @@ class Connection
      *
      * @var string
      */
-    protected $_classname = '\\Propel\\Runtime\\Connection\\ConnectionWrapper';
+    protected $classname = '\\Propel\\Runtime\\Connection\\ConnectionWrapper';
 
     /**
      * Set Name
@@ -94,7 +94,7 @@ class Connection
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -105,7 +105,7 @@ class Connection
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -116,8 +116,8 @@ class Connection
      */
     public function setAdapter($adapter)
     {
-        $this->_adapter = $adapter;
-        return $this->setDsn ( null );
+        $this->adapter = $adapter;
+        return $this->setDsn(null);
     }
 
     /**
@@ -127,7 +127,7 @@ class Connection
      */
     public function getAdapter()
     {
-        return $this->_adapter;
+        return $this->adapter;
     }
 
     /**
@@ -138,8 +138,8 @@ class Connection
      */
     public function setHost($host)
     {
-        $this->_host = $host;
-        return $this->setDsn ( null );
+        $this->host = $host;
+        return $this->setDsn(null);
     }
 
     /**
@@ -149,7 +149,7 @@ class Connection
      */
     public function getHost()
     {
-        return $this->_host;
+        return $this->host;
     }
 
     /**
@@ -160,8 +160,8 @@ class Connection
      */
     public function setDbname($dbname)
     {
-        $this->_dbname = $dbname;
-        return $this->setDsn ( null );
+        $this->dbname = $dbname;
+        return $this->setDsn(null);
     }
 
     /**
@@ -171,7 +171,7 @@ class Connection
      */
     public function getDbname()
     {
-        return $this->_dbname;
+        return $this->dbname;
     }
 
     /**
@@ -182,8 +182,8 @@ class Connection
      */
     public function setUser($user)
     {
-        $this->_user = $user;
-        return $this->setDsn ( null );
+        $this->user = $user;
+        return $this->setDsn(null);
     }
 
     /**
@@ -193,7 +193,7 @@ class Connection
      */
     public function getUser()
     {
-        return $this->_user;
+        return $this->user;
     }
 
     /**
@@ -204,8 +204,8 @@ class Connection
      */
     public function setPassword($password)
     {
-        $this->_password = $password;
-        return $this->setDsn ( null );
+        $this->password = $password;
+        return $this->setDsn(null);
     }
 
     /**
@@ -215,7 +215,7 @@ class Connection
      */
     public function getPassword()
     {
-        return $this->_password;
+        return $this->password;
     }
 
     /**
@@ -226,7 +226,7 @@ class Connection
      */
     public function setDsn($dsn)
     {
-        $this->_dsn = $dsn;
+        $this->dsn = $dsn;
         return $this;
     }
 
@@ -237,27 +237,27 @@ class Connection
      */
     public function getDsn()
     {
-        if (! $this->_dsn) {
-            switch ($this->getAdapter ()) {
-                case 'mysql' :
-                    $dsn = sprintf ( "mysql:host=%s;dbname=%s", $this->getHost (), $this->getDbname () );
-                    $this->setDsn ( $dsn );
+        if (!$this->dsn) {
+            switch ($this->getAdapter()) {
+                case 'mysql':
+                    $dsn = sprintf("mysql:host=%s;dbname=%s", $this->getHost(), $this->getDbname());
+                    $this->setDsn($dsn);
                     break;
                 case 'oci' :
-                    $dsn = sprintf ( "oci:dbname=//%s/%s", $this->getHost (), $this->getDbname () );
-                    $this->setDsn ( $dsn );
+                    $dsn = sprintf("oci:dbname=//%s/%s", $this->getHost(), $this->getDbname());
+                    $this->setDsn($dsn);
                     break;
                 case 'sqlite' :
-                    $dsn = sprintf ( "sqlite:%s/%s", $this->getHost (), $this->getDbname () );
-                    $this->setDsn ( $dsn );
+                    $dsn = sprintf("sqlite:%s/%s", $this->getHost(), $this->getDbname());
+                    $this->setDsn($dsn);
                     break;
                 case 'pgsql' :
-                    $dsn = sprintf ( "pgsql:host=%s;port=5432;dbname=%s;user=%s;password=%s", $this->getHost (), $this->getDbname (), $this->getUser (), $this->getPassword () );
-                    $this->setDsn ( $dsn );
+                    $dsn = sprintf("pgsql:host=%s;port=5432;dbname=%s;user=%s;password=%s", $this->getHost(), $this->getDbname(), $this->getUser(), $this->getPassword());
+                    $this->setDsn($dsn);
                     break;
             }
         }
-        return $this->_dsn;
+        return $this->dsn;
     }
 
     /**
@@ -268,7 +268,7 @@ class Connection
      */
     public function setCharset($charset)
     {
-        $this->_charset = $charset;
+        $this->charset = $charset;
         return $this;
     }
 
@@ -279,7 +279,7 @@ class Connection
      */
     public function getCharset()
     {
-        return $this->_charset;
+        return $this->charset;
     }
 
     /**
@@ -290,7 +290,7 @@ class Connection
      */
     public function setQueries($queries)
     {
-        $this->_queries = $queries;
+        $this->queries = $queries;
         return $this;
     }
 
@@ -301,7 +301,7 @@ class Connection
      */
     public function getQueries()
     {
-        return $this->_queries;
+        return $this->queries;
     }
 
     /**
@@ -312,7 +312,7 @@ class Connection
      */
     public function setClassname($classname)
     {
-        $this->_classname = $classname;
+        $this->classname = $classname;
         return $this;
     }
 
@@ -323,7 +323,7 @@ class Connection
      */
     public function getClassname()
     {
-        return $this->_classname;
+        return $this->classname;
     }
 
     /**
@@ -333,31 +333,31 @@ class Connection
      */
     public function getJsonConfiguration()
     {
-        $connection ['propel'] ['database'] ['connections'] [$this->getName ()] = [
-            'adapter' => $this->getAdapter (),
-            'classname' => $this->getClassname (),
-            'user' => $this->getUser (),
-            'password' => $this->getPassword (),
-            'dsn' => $this->getDsn () 
+        $connection['propel']['database']['connections'][$this->getName()] = [
+            'adapter'   => $this->getAdapter(),
+            'classname' => $this->getClassname(),
+            'user'      => $this->getUser(),
+            'password'  => $this->getPassword(),
+            'dsn'       => $this->getDsn() 
         ];
-        if ($this->getCharset ()) {
-            $connection ['propel'] ['database'] ['connections'] [$this->getName ()] ['settings'] ['charset'] = $this->getCharset ();
+        if ($this->getCharset()) {
+            $connection['propel']['database']['connections'][$this->getName()]['settings']['charset'] = $this->getCharset();
         }
-        if ($this->getQueries ()) {
-            $connection ['propel'] ['database'] ['connections'] [$this->getName ()] ['settings'] ['queries'] = $this->getQueries ();
+        if ($this->getQueries()) {
+            $connection['propel']['database']['connections'][$this->getName()]['settings']['queries'] = $this->getQueries();
         }
-        $connection ['propel'] ['runtime'] = [
-            'defaultConnection' => $this->getName (),
-            "connections" => [
+        $connection['propel']['runtime'] = [
+            'defaultConnection' => $this->getName(),
+            "connections"       => [
                 $this->getName () 
             ] 
         ];
-        $connection ['propel'] ['generator'] = [
-            "defaultConnection" => $this->getName (),
+        $connection['propel']['generator'] = [
+            "defaultConnection" => $this->getName(),
             "connections" => [
-                $this->getName () 
+                $this->getName() 
             ] 
         ];
-        return json_encode ( $connection );
+        return json_encode($connection);
     }
 }

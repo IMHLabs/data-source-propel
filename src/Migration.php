@@ -19,42 +19,42 @@ class Migration
      *
      * @var string
      */
-    protected $_connection = null;
+    protected $connection = null;
     
     /**
      * Schema Path
      *
      * @var string
      */
-    protected $_schemaPath = null;
+    protected $schemaPath = null;
     
     /**
      * Configuration Path
      *
      * @var string
      */
-    protected $_configurationPath = null;
+    protected $configurationPath = null;
     
     /**
      * Sql Path
      *
      * @var string
      */
-    protected $_sqlPath = null;
+    protected $sqlPath = null;
     
     /**
      * Migration Path
      *
      * @var string
      */
-    protected $_migrationPath = null;
+    protected $migrationPath = null;
     
     /**
      * Class Path
      *
      * @var string
      */
-    protected $_classPath = null;
+    protected $classPath = null;
 
     /**
      * Set Connection
@@ -64,7 +64,7 @@ class Migration
      */
     public function setConnection($connection)
     {
-        $this->_connection = $connection;
+        $this->connection = $connection;
         return $this;
     }
 
@@ -75,7 +75,7 @@ class Migration
      */
     public function getConnection()
     {
-        return $this->_connection;
+        return $this->connection;
     }
 
     /**
@@ -86,7 +86,7 @@ class Migration
      */
     public function setSchemaPath($schemaPath)
     {
-        $this->_schemaPath = $schemaPath;
+        $this->schemaPath = $schemaPath;
         return $this;
     }
 
@@ -97,7 +97,7 @@ class Migration
      */
     public function getSchemaPath()
     {
-        return realpath ( $this->_schemaPath );
+        return realpath($this->schemaPath);
     }
 
     /**
@@ -108,7 +108,7 @@ class Migration
      */
     public function setConfigurationPath($configurationPath)
     {
-        $this->_configurationPath = $configurationPath;
+        $this->configurationPath = $configurationPath;
         return $this;
     }
 
@@ -119,7 +119,7 @@ class Migration
      */
     public function getConfigurationPath()
     {
-        return realpath ( $this->_configurationPath );
+        return realpath($this->configurationPath);
     }
 
     /**
@@ -130,7 +130,7 @@ class Migration
      */
     public function setSqlPath($sqlPath)
     {
-        $this->_sqlPath = $sqlPath;
+        $this->sqlPath = $sqlPath;
         return $this;
     }
 
@@ -141,7 +141,7 @@ class Migration
      */
     public function getSqlPath()
     {
-        return realpath ( $this->_sqlPath );
+        return realpath($this->sqlPath);
     }
 
     /**
@@ -152,7 +152,7 @@ class Migration
      */
     public function setMigrationPath($migrationPath)
     {
-        $this->_migrationPath = $migrationPath;
+        $this->migrationPath = $migrationPath;
         return $this;
     }
 
@@ -163,7 +163,7 @@ class Migration
      */
     public function getMigrationPath()
     {
-        return realpath ( $this->_migrationPath );
+        return realpath($this->migrationPath);
     }
 
     /**
@@ -174,7 +174,7 @@ class Migration
      */
     public function setClassPath($classPath)
     {
-        $this->_classPath = $classPath;
+        $this->classPath = $classPath;
         return $this;
     }
 
@@ -185,7 +185,7 @@ class Migration
      */
     public function getClassPath()
     {
-        return realpath ( $this->_classPath );
+        return realpath($this->classPath);
     }
 
     /**
@@ -195,13 +195,13 @@ class Migration
      */
     public function build()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getClassPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getClassPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s model:build --config-dir="%s" --schema-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getSchemaPath (), $this->getClassPath () );
-            exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf ('%s model:build --config-dir="%s" --schema-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getSchemaPath(), $this->getClassPath());
+            exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -214,13 +214,13 @@ class Migration
      */
     public function buildSql()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getSqlPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getSqlPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s sql:build --config-dir="%s" --schema-dir="%s" --output-dir="%s" --overwrite', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getSchemaPath (), $this->getSqlPath () );
-            exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig ()) {
+            $propel_command = sprintf('%s sql:build --config-dir="%s" --schema-dir="%s" --output-dir="%s" --overwrite', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getSchemaPath(), $this->getSqlPath());
+            exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -233,13 +233,13 @@ class Migration
      */
     public function diff()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getMigrationPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getMigrationPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s migration:diff --config-dir="%s" --schema-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getSchemaPath (), $this->getMigrationPath () );
-            $results = exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf('%s migration:diff --config-dir="%s" --schema-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getSchemaPath(), $this->getMigrationPath());
+            $results        = exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -252,13 +252,13 @@ class Migration
      */
     public function down()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getMigrationPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getMigrationPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s migration:down --config-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getMigrationPath () );
-            $results = exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf('%s migration:down --config-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getMigrationPath());
+            $results        = exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -271,13 +271,13 @@ class Migration
      */
     public function migrate()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getMigrationPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getMigrationPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s migrate --config-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getMigrationPath () );
-            $results = exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf('%s migrate --config-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getMigrationPath());
+            $results        = exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -290,13 +290,13 @@ class Migration
      */
     public function status()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getMigrationPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getMigrationPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s migration:status --verbose --config-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getMigrationPath () );
-            $results = exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf('%s migration:status --verbose --config-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getMigrationPath());
+            $results = exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -309,13 +309,13 @@ class Migration
      */
     public function up()
     {
-        if ((! $this->getConfigurationPath ()) || (! $this->getSchemaPath ()) || (! $this->getMigrationPath ())) {
+        if ((!$this->getConfigurationPath()) || (!$this->getSchemaPath()) || (!$this->getMigrationPath())) {
             return false;
         }
-        if ($this->_createConfig ()) {
-            $propel_command = sprintf ( '%s migration:up --config-dir="%s" --output-dir="%s"', realpath ( $this->_getVendorPath () . '/bin/propel' ), $this->getConfigurationPath (), $this->getMigrationPath () );
-            $results = exec ( $propel_command, $output );
-            print implode ( "\n", $output );
+        if ($this->createConfig()) {
+            $propel_command = sprintf('%s migration:up --config-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getMigrationPath());
+            $results = exec($propel_command, $output);
+            print implode("\n", $output);
             return true;
         }
         return false;
@@ -326,13 +326,13 @@ class Migration
      *
      * @return boolean
      */
-    public function _createConfig()
+    public function createConfig()
     {
-        $connection = self::getConnection ();
-        $config = $connection->getJsonConfiguration ();
+        $connection = self::getConnection();
+        $config = $connection->getJsonConfiguration();
         if ($config) {
-            $config_path = $this->getConfigurationPath () . '/propel.json';
-            file_put_contents ( $config_path, $config );
+            $config_path = $this->getConfigurationPath() . '/propel.json';
+            file_put_contents($config_path, $config);
             return true;
         }
         return false;
@@ -343,9 +343,9 @@ class Migration
      *
      * @return string
      */
-    public function _getVendorPath()
+    public function getVendorPath()
     {
-        return realpath ( __DIR__ . '/../../../' );
+        return realpath( __DIR__ . '/../../../');
     }
 }
 
