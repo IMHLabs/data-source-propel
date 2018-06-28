@@ -31,8 +31,8 @@ class Propel
         $dataSources     = (is_array($dataSources)) ? $dataSources : [ 
             $dataSources 
         ];
-        $config          = @$config['propel'];
-        $connections     = @$config['database']['connections'];
+        $propelConfig    = @$config['propel'];
+        $connections     = @$propelConfig['database']['connections'];
         $defaultSettings = (@$connections['default']) ? $connections['default'] : [];
 		$dataSources     = ($dataSources) ?: array_keys($connections);
         foreach ($dataSources as $dataSource) {
@@ -43,6 +43,7 @@ class Propel
             $dataSourceSettings = [];
             if (!empty($config[$dataSource]['connection'])) {
                 $defaultSettings = array_merge($defaultSettings, $config[$dataSource]['connection']);
+                $dataSourceName = @$config[$dataSource]['connection']['name'];
             } elseif (class_exists($dataSource)) {
                 if (defined($dataSource . '::NAME'))
                     $dataSourceName = $dataSource::NAME;
@@ -66,6 +67,7 @@ class Propel
             } else {
                 $dataSourceName = $dataSource;
             }
+
             $configSettings     = (@$connections[$dataSource]) ?: [];
             $settings           = array_merge($defaultSettings, $configSettings);
             $connectionSettings = [ 
@@ -95,15 +97,16 @@ class Propel
      */
     public static function migration(array $config, $dataSource)
     {
-        $config                   = @$config['propel'];
-        $connections              = @$config['database']['connections'];
-        $migrationSettings        = @$config['database']['migration'];
+        $propelConfig             = @$config['propel'];
+        $connections              = @$propelConfig['database']['connections'];
+        $migrationSettings        = @$propelConfig['database']['migration'];
         $defaultSettings          = (@$connections['default']) ?: [];
         $defaultMigrationSettings = (@$migrationSettings['default']) ?: [];
         $dataSourceName           = null;
         $dataSourceSettings       = $dataSourceMigrationSettings = [];
         if (!empty($config[$dataSource]['connection'])) {
             $defaultSettings = array_merge($defaultSettings, $config[$dataSource]['connection']);
+            $dataSourceName  = @$config[$dataSource]['connection']['name'];
             if (!empty($config[$dataSource]['migration'])) {
                 $defaultMigrationSettings = array_merge($defaultMigrationSettings, $config[$dataSource]['migration']);
             }
