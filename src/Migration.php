@@ -199,7 +199,7 @@ class Migration
             return false;
         }
         if ($this->createConfig()) {
-            $propel_command = sprintf ('%s model:build --config-dir="%s" --schema-dir="%s" --output-dir="%s"', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getSchemaPath(), $this->getClassPath());
+            $propel_command = sprintf ('%s model:build --config-dir="%s" --schema-dir="%s" --output-dir="%s" --disable-namespace-auto-package', realpath($this->getVendorPath() . '/bin/propel'), $this->getConfigurationPath(), $this->getSchemaPath(), $this->getClassPath());
             exec($propel_command, $output);
             print implode("\n", $output);
             return true;
