@@ -32,7 +32,7 @@ class Propel
             $dataSources 
         ];
         $config          = @$config['propel'];
-        $connections     = @$config['database'] ['connections'];
+        $connections     = @$config['database']['connections'];
         $defaultSettings = (@$connections['default']) ? $connections['default'] : [];
 		$dataSources     = ($dataSources) ?: array_keys($connections);
         foreach ($dataSources as $dataSource) {
@@ -41,7 +41,9 @@ class Propel
 			}
             $dataSourceName     = null;
             $dataSourceSettings = [];
-            if (class_exists($dataSource)) {
+            if (!empty($config[$dataSource]['connection'])) {
+                $defaultSettings = array_merge($defaultSettings, $config[$dataSource]['connection']);
+            } elseif (class_exists($dataSource)) {
                 if (defined($dataSource . '::NAME'))
                     $dataSourceName = $dataSource::NAME;
                 if (defined($dataSource . '::ADAPTER'))
@@ -100,7 +102,12 @@ class Propel
         $defaultMigrationSettings = (@$migrationSettings['default']) ?: [];
         $dataSourceName           = null;
         $dataSourceSettings       = $dataSourceMigrationSettings = [];
-        if (class_exists($dataSource)) {
+        if (!empty($config[$dataSource]['connection'])) {
+            $defaultSettings = array_merge($defaultSettings, $config[$dataSource]['connection']);
+            if (!empty($config[$dataSource]['migration'])) {
+                $defaultMigrationSettings = array_merge($defaultMigrationSettings, $config[$dataSource]['migration']);
+            }
+        } elseif (class_exists($dataSource)) {
             if (defined($dataSource . '::NAME'))
                 $dataSourceName = $dataSource::NAME;
             if (defined($dataSource . '::ADAPTER'))
